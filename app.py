@@ -10,7 +10,7 @@ import os
 # --- Page Config ---
 st.set_page_config(
     page_title="Music Genre Classifier",
-    page_icon="🎵",
+    page_icon="",
     layout="centered"
 )
 
@@ -100,18 +100,18 @@ def predict_genre(audio_bytes):
     final_genre = Counter(predictions).most_common(1)[0][0]
     return final_genre, predictions, confidences
 
-# --- Genre Colors & Emojis ---
-GENRE_STYLE = {
-    'blues': ('🎷', '#1E40AF'),
-    'classical': ('🎻', '#7C3AED'),
-    'country': ('🤠', '#D97706'),
-    'disco': ('🪩', '#EC4899'),
-    'hiphop': ('🎤', '#EF4444'),
-    'jazz': ('🎺', '#F59E0B'),
-    'metal': ('🤘', '#374151'),
-    'pop': ('🎶', '#10B981'),
-    'reggae': ('🌴', '#059669'),
-    'rock': ('🎸', '#DC2626'),
+# --- Genre Colors ---
+GENRE_COLORS = {
+    'blues': '#1E40AF',
+    'classical': '#7C3AED',
+    'country': '#D97706',
+    'disco': '#EC4899',
+    'hiphop': '#EF4444',
+    'jazz': '#F59E0B',
+    'metal': '#374151',
+    'pop': '#10B981',
+    'reggae': '#059669',
+    'rock': '#DC2626',
 }
 
 # --- UI ---
@@ -156,7 +156,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<p class="main-title">🎵 Music Genre Classifier</p>', unsafe_allow_html=True)
+st.markdown('<p class="main-title">Music Genre Classifier</p>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">Upload a song and the AI will predict its genre using an ANN trained on the GTZAN dataset</p>', unsafe_allow_html=True)
 
 # File uploader
@@ -171,31 +171,29 @@ if uploaded_file is not None:
     st.audio(uploaded_file, format=f"audio/{uploaded_file.name.split('.')[-1]}")
 
     # Predict
-    with st.spinner("🎧 Analyzing audio... splitting into chunks and extracting features"):
+    with st.spinner("Analyzing audio... splitting into chunks and extracting features"):
         audio_bytes = uploaded_file.read()
         final_genre, chunk_predictions, chunk_confidences = predict_genre(audio_bytes)
 
     if final_genre:
-        emoji, color = GENRE_STYLE.get(final_genre, ('🎵', '#6366F1'))
+        color = GENRE_COLORS.get(final_genre, '#6366F1')
 
         # Result
         st.markdown(f"""
         <div class="genre-result" style="background: {color}15; border: 2px solid {color};">
-            <span style="font-size: 3rem;">{emoji}</span><br>
             <span style="color: {color};">{final_genre.upper()}</span>
         </div>
         """, unsafe_allow_html=True)
 
         # Chunk details
-        with st.expander("📊 Chunk-by-Chunk Predictions", expanded=True):
+        with st.expander("Chunk-by-Chunk Predictions", expanded=True):
             cols = st.columns(5)
             for i, (pred, conf) in enumerate(zip(chunk_predictions, chunk_confidences)):
                 with cols[i % 5]:
-                    e, c = GENRE_STYLE.get(pred, ('🎵', '#6366F1'))
+                    c = GENRE_COLORS.get(pred, '#6366F1')
                     st.markdown(f"""
                     <div style="text-align:center; padding:0.5rem; border-radius:0.5rem; background:{c}10; border:1px solid {c}30; margin-bottom:0.5rem;">
                         <div style="font-size:0.7rem; color:#9CA3AF;">Chunk {i+1}</div>
-                        <div style="font-size:1.2rem;">{e}</div>
                         <div style="font-size:0.8rem; font-weight:600; color:{c};">{pred}</div>
                         <div style="font-size:0.7rem; color:#6B7280;">{conf:.0%}</div>
                     </div>
@@ -203,11 +201,11 @@ if uploaded_file is not None:
 
         # Vote summary
         vote_counts = Counter(chunk_predictions)
-        st.markdown("### 🗳️ Vote Summary")
+        st.markdown("### Vote Summary")
         for genre, count in vote_counts.most_common():
-            emoji_g, color_g = GENRE_STYLE.get(genre, ('🎵', '#6366F1'))
+            color_g = GENRE_COLORS.get(genre, '#6366F1')
             pct = count / len(chunk_predictions)
-            st.progress(pct, text=f"{emoji_g} {genre}: {count}/{len(chunk_predictions)} votes")
+            st.progress(pct, text=f"{genre}: {count}/{len(chunk_predictions)} votes")
 
     else:
         st.error("Could not analyze the audio. Make sure the file is at least 3 seconds long.")
