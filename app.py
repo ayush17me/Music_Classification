@@ -118,7 +118,7 @@ st.markdown("""
 <style>
     .main-title {
         text-align: center;
-        background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
+        background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-size: 3rem;
@@ -127,9 +127,27 @@ st.markdown("""
     }
     .subtitle {
         text-align: center;
-        color: #D1D5DB;
+        color: #4B5563;
         font-size: 1.1rem;
         margin-bottom: 2rem;
+    }
+    .footer-text {
+        text-align: center;
+        color: #6B7280;
+        font-size: 0.85rem;
+    }
+    @media (prefers-color-scheme: dark) {
+        .main-title {
+            background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: #D1D5DB;
+        }
+        .footer-text {
+            color: #D1D5DB;
+        }
     }
     .genre-result {
         text-align: center;
@@ -212,7 +230,7 @@ if uploaded_file is not None:
 # Footer
 st.markdown("---")
 st.markdown(
-    "<p style='text-align:center; color:#D1D5DB; font-size:0.85rem;'>"
+    "<p class='footer-text'>"
     "Made by using Artificial Neural Networks"
     "</p>",
     unsafe_allow_html=True
