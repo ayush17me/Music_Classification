@@ -127,27 +127,16 @@ st.markdown("""
     }
     .subtitle {
         text-align: center;
-        color: #4B5563;
+        color: var(--text-color);
+        opacity: 0.8;
         font-size: 1.1rem;
         margin-bottom: 2rem;
     }
     .footer-text {
         text-align: center;
-        color: #6B7280;
+        color: var(--text-color);
+        opacity: 0.6;
         font-size: 0.85rem;
-    }
-    @media (prefers-color-scheme: dark) {
-        .main-title {
-            background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .subtitle {
-            color: #D1D5DB;
-        }
-        .footer-text {
-            color: #D1D5DB;
-        }
     }
     .genre-result {
         text-align: center;
