@@ -157,7 +157,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown('<p class="main-title">Music Genre Classifier</p>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Upload a song and the AI will predict its genre using an ANN trained on the GTZAN dataset</p>', unsafe_allow_html=True)
+st.markdown('<p class="subtitle">Upload a song and the AI will predict its genre using an ANN</p>', unsafe_allow_html=True)
 
 # File uploader
 uploaded_file = st.file_uploader(
@@ -214,7 +214,7 @@ if uploaded_file is not None:
 st.markdown("---")
 st.markdown(
     "<p style='text-align:center; color:#9CA3AF; font-size:0.85rem;'>"
-    "Music Genre Classification"
+    "Made by using Artificial Neural Networks"
     "</p>",
     unsafe_allow_html=True
 )
