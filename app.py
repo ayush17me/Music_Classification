@@ -214,8 +214,7 @@ if uploaded_file is not None:
 st.markdown("---")
 st.markdown(
     "<p style='text-align:center; color:#9CA3AF; font-size:0.85rem;'>"
-    "Built with TensorFlow, Librosa & Streamlit | "
-    "Model: ANN (512→256→128→64) | ~94% accuracy on GTZAN dataset"
+    "Music Genre Classification"
     "</p>",
     unsafe_allow_html=True
 )
